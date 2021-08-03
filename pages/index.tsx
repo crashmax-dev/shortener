@@ -12,8 +12,6 @@ export default function Index() {
   const [isCopy, setCopy] = useState(false)
   const [isSubmit, setSubmit] = useState(false)
 
-  const toggleSubmit = () => setSubmit(!isSubmit)
-
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     if (value === '') setCopy(false)
@@ -27,30 +25,33 @@ export default function Index() {
   }
 
   const createShortenUrl = async () => {
-    if (!url.match('^(https:|http:|www\.)\S*')) return
+    try {
+      if (!url.match('^(https:|http:|www\.)\S*')) return
 
-    toggleSubmit()
+      setSubmit(true)
 
-    const response = await fetch('/api/shortener', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        url: url
+      const response = await fetch('/api/shortener', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          url: url
+        })
       })
-    })
 
-    const data = await response.json() as ApiReponse
+      const data = await response.json() as ApiReponse
 
-    if (data.ok) {
-      const url = window.location.href + data.slug
-      setUrl(url)
-      setCopy(true)
+      if (data.ok) {
+        const url = window.location.href + data.slug
+        setUrl(url)
+        setCopy(true)
+      }
+    } catch (err) {
+      console.log(err)
+    } finally {
       setSubmit(false)
     }
-
-    toggleSubmit()
   }
 
   return (
