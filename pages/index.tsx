@@ -49,6 +49,8 @@ export default function Index() {
       setCopy(true)
       setSubmit(false)
     }
+
+    toggleSubmit()
   }
 
   return (
