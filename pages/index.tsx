@@ -15,7 +15,16 @@ export default function Index() {
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     if (value === '') setCopy(false)
+    disableInputError()
     setUrl(value)
+  }
+
+  const disableInputError = () => {
+    input.current.classList.remove('border-red-500', 'bg-red-100')
+  }
+
+  const enableInputError = () => {
+    input.current.classList.add('border-red-500', 'bg-red-100')
   }
 
   const clickToCopy = () => {
@@ -26,8 +35,6 @@ export default function Index() {
 
   const createShortenUrl = async () => {
     try {
-      if (!url.match('^(https:|http:|www\.)\S*')) return
-
       setSubmit(true)
 
       const response = await fetch('/api/shortener', {
@@ -43,9 +50,11 @@ export default function Index() {
       const data = await response.json() as ApiReponse
 
       if (data.ok) {
-        const url = window.location.href + data.slug
-        setUrl(url)
+        disableInputError()
+        setUrl(window.location.href + data.slug)
         setCopy(true)
+      } else {
+        enableInputError()
       }
     } catch (err) {
       console.log(err)
@@ -68,7 +77,7 @@ export default function Index() {
         {isCopy ?
           <button
             onClick={clickToCopy}
-            className="bg-black text-xl font-light text-white rounded disabled:opacity-50 px-4 py-2"
+            className="bg-black text-xl font-light text-white rounded px-4 py-2"
           >
             Copy
           </button>
@@ -76,7 +85,7 @@ export default function Index() {
           <button
             disabled={isSubmit}
             onClick={createShortenUrl}
-            className="bg-black text-xl font-light text-white rounded disabled:opacity-50 px-4 py-2"
+            className="bg-black text-xl font-light text-white rounded px-4 py-2"
           >
             Shorten
           </button>
