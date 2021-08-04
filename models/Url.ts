@@ -1,4 +1,4 @@
-import uuid from 'short-uuid'
+import crypto from 'crypto'
 import mongoose, { Schema, model } from 'mongoose'
 
 export interface IUrl {
@@ -16,7 +16,7 @@ const UrlSchema = new Schema({
   },
   slug: {
     type: String,
-    default: uuid.generate()
+    default: () => crypto.randomBytes(4).toString('hex')
   },
   timestamp: {
     type: Date,
