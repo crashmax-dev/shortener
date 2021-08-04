@@ -4,7 +4,7 @@ import { findUrl } from './api/shortener'
 export default function Slug() {
   return (
     <Layout>
-      <div className="text-gray-500 font-light text-3xl mb-2 text-center">
+      <div className="text-gray-500 font-light text-3xl text-center">
         Please wait...
       </div>
     </Layout>
