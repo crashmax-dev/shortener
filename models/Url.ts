@@ -1,3 +1,4 @@
+import uuid from 'short-uuid'
 import mongoose, { Schema, model } from 'mongoose'
 
 export interface IUrl {
@@ -8,10 +9,14 @@ export interface IUrl {
 
 const UrlSchema = new Schema({
   url: {
-    type: String
+    type: String,
+    validate: {
+      validator: (v: string) => v.match('^(https:|http:|www\.)\S*')
+    }
   },
   slug: {
-    type: String
+    type: String,
+    default: uuid.generate()
   },
   timestamp: {
     type: Date,
