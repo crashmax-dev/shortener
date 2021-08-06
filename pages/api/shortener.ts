@@ -1,6 +1,12 @@
 import Url, { IUrl } from '~/models/Url'
+import rateLimit from '~/lib/rate-limit'
 import connectToDatabase from '~/lib/mongodb'
 import { NextApiRequest, NextApiResponse } from 'next'
+
+const limiter = rateLimit({
+  interval: 60 * 1000,
+  uniqueTokenPerInterval: 500
+})
 
 export default async function shortener(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
@@ -15,6 +21,16 @@ export default async function shortener(req: NextApiRequest, res: NextApiRespons
 
       if (url) {
         const data = await createUrl(url)
+
+        try {
+          await limiter.check(res, 10, 'CACHE_TOKEN')
+        } catch (err) {
+          return res.status(429).json({
+            ok: false,
+            message: 'Rate limit exceeded!'
+          })
+        }
+
         return response(res, 201, data)
       }
     } catch (err) {
