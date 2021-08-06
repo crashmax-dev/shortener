@@ -29,7 +29,7 @@ export default function Index() {
   }, [])
 
   const inputSubmitEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.keyCode === 13) {
+    if (!isCopy && e.keyCode === 13) {
       createShorten()
     }
   }
