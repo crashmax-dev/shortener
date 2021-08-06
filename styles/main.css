@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap');
+/* main.css */
+
+* {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+
+#__next {
+  height: 100%;
+  background-color: #000;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+}
+
+.container {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  height: 100%;
+  max-width: 50rem;
+  margin: 0 auto;
+  color: #ffffff;
+}
+
+h1 {
+  text-align: center;
+}
+
+button {
+  cursor: pointer;
+}
+
+button, input {
+  height: 40px;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  font-family: inherit;
+  color: #f3f4f6;
+  background: #1f2937;
+  border-color: #111827;
+}
+
+input {
+  padding: 12px !important;
+}
+
+input:active, input:focus {
+  outline: none;
+  background-color: #1f2937;
+}
+
+input::placeholder {
+  color: #F9FAFB;
+}
+
+.input_shake {
+  animation: shake 0.4s 1 linear;
+}
+
+@keyframes shake {
+  0% {
+    -webkit-transform: translate(20px);
+  }
+  20% {
+    -webkit-transform: translate(-20px);
+  }
+  40% {
+    -webkit-transform: translate(15px);
+  }
+  60% {
+    -webkit-transform: translate(-10px);
+  }
+  80% {
+    -webkit-transform: translate(5px);
+  }
+  100% {
+    -webkit-transform: translate(0px);
+  }
+}

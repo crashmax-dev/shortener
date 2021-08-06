@@ -6,7 +6,7 @@ export default function Layout({ children }) {
       <Head>
         <title>Shortener</title>
       </Head>
-      <main className="flex flex-col items-center justify-center min-h-screen">
+      <main className="container">
         {children}
       </main>
     </>
