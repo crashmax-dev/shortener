@@ -3,6 +3,10 @@ export default function isValidUrl(string: string) {
 
   try {
     url = new URL(string)
+
+    if (url.host === document.location.host) {
+      throw Error()
+    }
   } catch (_) {
     return false
   }
