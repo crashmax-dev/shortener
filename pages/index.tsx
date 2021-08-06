@@ -1,7 +1,13 @@
 import { IUrl } from '~/models/Url'
 import Loader from '~/components/Loader'
 import isValidUrl from '~/lib/valid-url'
-import React, { useState, useRef, useEffect } from 'react'
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  ChangeEvent,
+  KeyboardEvent
+} from 'react'
 import Github from '~/components/Github'
 
 interface ApiReponse extends Partial<IUrl> {
@@ -22,7 +28,13 @@ export default function Index() {
     })
   }, [])
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const inputSubmitEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.keyCode === 13) {
+      createShorten()
+    }
+  }
+
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setUrl(e.target.value)
     setCopy(false)
   }
@@ -87,6 +99,7 @@ export default function Index() {
               className="form-control"
               placeholder="Shorten your link"
               onChange={handleInput}
+              onKeyDown={inputSubmitEnter}
             />
             <div className="input-group-append">
               {isCopy ?
