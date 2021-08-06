@@ -1,7 +1,8 @@
 import { IUrl } from '~/models/Url'
-import Layout from '~/components/Layout'
 import Loader from '~/components/Loader'
+import isValidUrl from '~/lib/valid-url'
 import React, { useState, useRef, useEffect } from 'react'
+import Github from '~/components/Github'
 
 interface ApiReponse extends Partial<IUrl> {
   ok: boolean
@@ -10,13 +11,14 @@ interface ApiReponse extends Partial<IUrl> {
 
 export default function Index() {
   const input = useRef<HTMLInputElement>()
+  const inputGroup = useRef<HTMLDivElement>()
   const [url, setUrl] = useState('')
   const [isCopy, setCopy] = useState(false)
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    input.current.addEventListener('animationend', () => {
-      input.current.classList.remove('input_shake')
+    inputGroup.current.addEventListener('animationend', () => {
+      inputGroup.current.classList.remove('input-shake')
     })
   }, [])
 
@@ -32,12 +34,12 @@ export default function Index() {
   }
 
   const inputShake = () => {
-    input.current.classList.add('input_shake')
+    inputGroup.current.classList.add('input-shake')
   }
 
   const createShorten = async () => {
     try {
-      if (!input.current.value) {
+      if (!isValidUrl(input.current.value)) {
         return inputShake()
       }
 
@@ -69,29 +71,43 @@ export default function Index() {
   }
 
   return (
-    <Layout>
-      <input
-        name="url"
-        type="text"
-        ref={input}
-        value={url}
-        autoComplete="off"
-        onChange={handleInput}
-        placeholder="https://..."
-        style={{ marginBottom: '1rem' }}
-      />
-      {isCopy ?
-        <button onClick={clickToCopy}>
-          Copy
-        </button>
-        :
-        <button
-          disabled={loading}
-          onClick={createShorten}
-        >
-          {loading ? <Loader /> : 'Shorten'}
-        </button>
-      }
-    </Layout>
+    <div className="main-container">
+      <Github />
+      <div>
+        <div className="container title-container">
+          <h1>URL Shortener</h1>
+        </div>
+        <div className="input-form">
+          <div className="input-group" ref={inputGroup}>
+            <input
+              ref={input}
+              value={url}
+              type="text"
+              autoComplete="off"
+              className="form-control"
+              placeholder="Shorten your link"
+              onChange={handleInput}
+            />
+            <div className="input-group-append">
+              {isCopy ?
+                <button
+                  onClick={clickToCopy}
+                  className="btn btn-outline-light"
+                >
+                  Copy
+                </button>
+                :
+                <button
+                  onClick={createShorten}
+                  className="btn btn-outline-light"
+                >
+                  {loading ? <Loader /> : 'Shorten'}
+                </button>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }

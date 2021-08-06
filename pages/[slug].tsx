@@ -1,11 +1,10 @@
-import Layout from '~/components/Layout'
 import { findUrl } from './api/shortener'
 
 export default function Slug() {
   return (
-    <Layout>
+    <div className="main-container">
       <h1>Please wait...</h1>
-    </Layout>
+    </div>
   )
 }
 
@@ -22,9 +21,9 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       data
-    },
-    redirect: {
-      destination: !data ? '/' : data.url
     }
+    // redirect: {
+    //   destination: !data ? '/' : data.url
+    // }
   }
 }

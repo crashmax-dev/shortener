@@ -7,14 +7,26 @@
 }
 
 #__next {
-  height: 100%;
-  background-color: #000;
+  height: 100vh;
 }
 
 html, body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
   margin: 0;
-  height: 100%;
   font-family: 'Inter', sans-serif;
+}
+
+.main-container {
+  height: inherit;
+  padding: 50px;
+  background: #000;
+  color: white;
+  display: flex;
+  flex: auto;
+  align-items: center;
+  justify-content: center;
 }
 
 .container {
@@ -38,51 +50,116 @@ button {
   cursor: pointer;
 }
 
-button, input {
-  height: 40px;
-  padding: 8px;
-  font-size: 16px;
-  border-radius: 4px;
-  font-family: inherit;
-  color: #f3f4f6;
-  background: #1f2937;
-  border-color: #111827;
+.input-form {
+  padding: 10px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  width: 80vw;
+  max-width: 800px;
 }
 
-input {
-  padding: 12px !important;
+.input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+}
+
+.input-group>.custom-file, .input-group>.custom-select, .input-group>.form-control {
+  position: relative;
+  flex: 1 1 auto;
+  width: 1%;
+  margin-bottom: 0;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0px 0px 0px 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border-radius: 4px 0px 0px 4px;
+}
+
+.input-group-append {
+  margin-left: -1px;
+}
+
+.input-group-append, .input-group-prepend {
+  display: flex;
+}
+
+button, input {
+  height: 44px;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 0px 4px 4px 0px;
+  font-family: inherit;
+  color: #fff;
+  background: transparent;
+  border: 1px solid transparent;
+  border-color: #f8f9fa;
 }
 
 input:active, input:focus {
   outline: none;
-  background-color: #1f2937;
 }
 
 input::placeholder {
-  color: #F9FAFB;
+  color: #495057;
 }
 
-.input_shake {
+.input-shake {
   animation: shake 0.4s 1 linear;
 }
 
 @keyframes shake {
   0% {
-    -webkit-transform: translate(20px);
+    transform: translate(20px);
   }
   20% {
-    -webkit-transform: translate(-20px);
+    transform: translate(-20px);
   }
   40% {
-    -webkit-transform: translate(15px);
+    transform: translate(15px);
   }
   60% {
-    -webkit-transform: translate(-10px);
+    transform: translate(-10px);
   }
   80% {
-    -webkit-transform: translate(5px);
+    transform: translate(5px);
   }
   100% {
-    -webkit-transform: translate(0px);
+    transform: translate(0px);
+  }
+}
+
+.github-corner:hover .octo-arm {
+  animation: octocat-wave 560ms ease-in-out
+}
+
+@keyframes octocat-wave {
+  0%, 100% {
+    transform: rotate(0)
+  }
+  20%, 60% {
+    transform: rotate(-25deg)
+  }
+  40%, 80% {
+    transform: rotate(10deg)
+  }
+}
+
+@media (max-width:500px) {
+  .github-corner:hover .octo-arm {
+    animation: none
+  }
+  .github-corner .octo-arm {
+    animation: octocat-wave 560ms ease-in-out
   }
 }
