@@ -21,9 +21,9 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       data
+    },
+    redirect: {
+      destination: !data ? '/' : data.url
     }
-    // redirect: {
-    //   destination: !data ? '/' : data.url
-    // }
   }
 }

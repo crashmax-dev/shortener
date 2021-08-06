@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function Github() {
   return (
     <a href="https://github.com/crashmax-dev/shortener" target="_blank" className="github-corner" aria-label="View source on GitHub" rel="noreferrer">
