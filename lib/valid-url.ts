@@ -1,10 +1,10 @@
-export default function isValidUrl(string: string) {
+export default function isValidUrl(string: string, host?: string) {
   let url: URL
 
   try {
     url = new URL(string)
 
-    if (url.host === document.location.host) {
+    if (url.host === (host || document.location.host)) {
       throw Error()
     }
   } catch (_) {

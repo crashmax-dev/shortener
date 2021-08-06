@@ -1,5 +1,6 @@
 import Url, { IUrl } from '~/models/Url'
 import rateLimit from '~/lib/rate-limit'
+import isValidUrl from '~/lib/valid-url'
 import connectToDatabase from '~/lib/mongodb'
 import { NextApiRequest, NextApiResponse } from 'next'
 
@@ -15,11 +16,17 @@ export default async function shortener(req: NextApiRequest, res: NextApiRespons
 
       if (slug) {
         const data = await findUrl(slug)
-        if (!data) throw new Error('Url is not found!')
+        if (!data) {
+          throw new Error('Url is not found!')
+        }
         return response(res, 200, data)
       }
 
       if (url) {
+        if (!isValidUrl(url, req.headers.host)) {
+          throw new Error('Url validation failed')
+        }
+
         const data = await createUrl(url)
 
         try {

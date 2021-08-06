@@ -1,6 +1,5 @@
 import crypto from 'crypto'
 import mongoose, { Schema, model } from 'mongoose'
-import isValidUrl from '~/lib/valid-url'
 
 export interface IUrl {
   url: string
@@ -11,9 +10,7 @@ export interface IUrl {
 const UrlSchema = new Schema({
   url: {
     type: String,
-    validate: {
-      validator: (url: string) => isValidUrl(url)
-    }
+    required: true
   },
   slug: {
     type: String,
