@@ -18,6 +18,21 @@ html, body {
   font-family: 'Inter', sans-serif;
 }
 
+p {
+  padding-left: 8px;
+  margin: 0;
+}
+
+p::selection {
+  background: #fff;
+  color: #000;
+}
+
+::selection {
+  background: #000;
+  color: #fff;
+}
+
 .main-container {
   height: inherit;
   padding: 50px;
@@ -27,6 +42,17 @@ html, body {
   flex: auto;
   align-items: center;
   justify-content: center;
+}
+
+.secondary-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 32px 0px 22px 0px;
+}
+
+.secondary-container .input-form {
+  padding: 0px 0px 10px 0px;
 }
 
 .container {
@@ -39,7 +65,7 @@ html, body {
   height: 100%;
   max-width: 50rem;
   margin: 0 auto;
-  color: #ffffff;
+  color: #fff;
 }
 
 h1 {
@@ -51,6 +77,7 @@ button {
 }
 
 .input-form {
+  margin: auto;
   padding: 10px;
   justify-content: center;
   display: flex;
@@ -80,7 +107,7 @@ button {
   padding: 0px 0px 0px 8px;
   font-size: 14px;
   line-height: 1.5;
-  color: #495057;
+  color: #000;
   background-color: #fff;
   background-clip: padding-box;
   border-radius: 4px 0px 0px 4px;
@@ -94,6 +121,54 @@ button {
   display: flex;
 }
 
+.border-none {
+  border-radius: 0px;
+  border: 1px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.icon {
+  height: 18px;
+  display: inline-block;
+  line-height: 1em;
+  flex-shrink: 0;
+  color: currentColor;
+  vertical-align: middle;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted #000;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  width: 190px;
+  height: 44px;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px 0px 0px 4px;
+  position: absolute;
+  z-index: 1;
+  top: 0px;
+  right: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  font-size: 12px;
+  user-select: text;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+}
+
 button, input {
   height: 44px;
   padding: 8px;
@@ -101,9 +176,12 @@ button, input {
   border-radius: 0px 4px 4px 0px;
   font-family: inherit;
   color: #fff;
-  background: transparent;
-  border: 1px solid transparent;
-  border-color: #f8f9fa;
+  background: #000;
+  border: 1px solid #fff;
+}
+
+.border-reverse {
+  border: 1px solid #000;
 }
 
 input:active, input:focus {
@@ -111,7 +189,7 @@ input:active, input:focus {
 }
 
 input::placeholder {
-  color: #495057;
+  color: #000;
 }
 
 .input-shake {
@@ -137,6 +215,15 @@ input::placeholder {
   100% {
     transform: translate(0px);
   }
+}
+
+.svg-github {
+  fill: #fff;
+  color: #000;
+  position: absolute;
+  top: 0;
+  border: 0;
+  right: 0;
 }
 
 .github-corner:hover .octo-arm {
