@@ -38,9 +38,13 @@ export default function Index() {
     window.localStorage.setItem('history', JSON.stringify(history))
   }
 
-  const inputSubmitEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (!isCopy && e.keyCode === 13) {
+  const inputKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (!isCopy && e.code === 'Enter') {
       createShorten()
+    }
+
+    if (isCopy && e.code === 'Backspace') {
+      input.current.value = ''
     }
   }
 
@@ -105,7 +109,7 @@ export default function Index() {
                 className="form-control"
                 placeholder="Shorten your link"
                 onChange={handleInput}
-                onKeyDown={inputSubmitEnter}
+                onKeyDown={inputKeyDown}
               />
               <div className="input-group-append">
                 {isCopy ?
