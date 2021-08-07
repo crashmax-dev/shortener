@@ -48,7 +48,14 @@ p::selection {
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 32px 0px 22px 0px;
+}
+
+.secondary-container .input-form:first-child {
+  padding-top: 32px;
+}
+
+.secondary-container .input-form:last-child {
+  padding-bottom: 32px;
 }
 
 .secondary-container .input-form {
