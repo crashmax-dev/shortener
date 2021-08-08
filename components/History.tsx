@@ -21,8 +21,8 @@ const History: React.FC<HistoryProps> = ({ history, setHistory }) => {
     e.currentTarget.value = window.location.href + slug
   }
 
-  const onMouseLeave = (e: MouseEvent<HTMLInputElement>, url: string) => {
-    e.currentTarget.value = url
+  const onMouseLeave = (e: MouseEvent<HTMLInputElement>) => {
+    e.currentTarget.value = ''
   }
 
   const clearHistory = () => {
@@ -41,11 +41,11 @@ const History: React.FC<HistoryProps> = ({ history, setHistory }) => {
             <div key={key} className="input-form">
               <input
                 type="text"
-                defaultValue={url}
+                placeholder={url}
                 onKeyPress={onKeyPress}
                 onClick={() => onClick(slug)}
                 onMouseEnter={e => onMouseEnter(e, slug)}
-                onMouseLeave={e => onMouseLeave(e, url)}
+                onMouseLeave={onMouseLeave}
                 className="border-reverse pointer"
               />
               <button className="tooltip border-none">
