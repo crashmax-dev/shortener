@@ -77,17 +77,12 @@ p::selection {
 }
 
 .chevron-button {
-  padding: 1rem;
-  margin-left: auto;
-  margin-right: auto;
-  left: 50%;
-  right: 0;
+  padding: 10px;
   bottom: 0;
   width: 100%;
   text-align: center;
   position: absolute;
   cursor: pointer;
-  transform: translateX(-50%);
 }
 
 .input-form {
