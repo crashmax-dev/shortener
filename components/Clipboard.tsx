@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import Icon from './Icons'
 
-interface ClipboardButtonProps {
+interface ClipboardProps {
   text: string
   className?: string
 }
 
-const Clipboard: React.FC<ClipboardButtonProps> = ({ text, className }) => {
+const Clipboard: React.FC<ClipboardProps> = ({ text, className }) => {
   const [copied, setCopied] = useState(false)
 
   const onCopy = () => {
@@ -15,7 +15,7 @@ const Clipboard: React.FC<ClipboardButtonProps> = ({ text, className }) => {
       setCopied(true)
       setTimeout(() => {
         setCopied(false)
-      }, 1000)
+      }, 2000)
     }
   }
 
@@ -25,7 +25,10 @@ const Clipboard: React.FC<ClipboardButtonProps> = ({ text, className }) => {
       onCopy={onCopy}
     >
       <button className={className}>
-        {copied ? <Icon.Check /> : <Icon.Copy />}
+        {copied ?
+          <Icon.Check /> :
+          <Icon.Copy />
+        }
       </button>
     </CopyToClipboard>
   )

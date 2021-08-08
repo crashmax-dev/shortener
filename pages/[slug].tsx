@@ -1,9 +1,10 @@
+import Icon from '~/components/Icons'
 import { findUrl } from './api/shortener'
 
 export default function Slug() {
   return (
-    <div className="main-container">
-      <h1>Please wait...</h1>
+    <div className="header-container">
+      <Icon.Loading width="46px" height="46px" />
     </div>
   )
 }

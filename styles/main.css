@@ -18,6 +18,14 @@ html, body {
   font-family: 'Inter', sans-serif;
 }
 
+h1 {
+  text-align: center;
+}
+
+button {
+  cursor: pointer;
+}
+
 p {
   padding-left: 8px;
   margin: 0;
@@ -33,9 +41,9 @@ p::selection {
   color: #fff;
 }
 
-.main-container {
+.header-container {
   height: inherit;
-  padding: 50px;
+  padding: 20px;
   background: #000;
   color: white;
   display: flex;
@@ -44,43 +52,42 @@ p::selection {
   justify-content: center;
 }
 
-.secondary-container {
+.history-container {
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 
-.secondary-container .input-form:first-child {
+.history-container .input-form:first-child {
   padding-top: 32px;
 }
 
-.secondary-container .input-form:last-child {
+.history-container .input-form:last-child {
   padding-bottom: 32px;
 }
 
-.secondary-container .input-form {
+.history-container .input-form {
   padding: 0px 0px 10px 0px;
 }
 
 .container {
   display: flex;
-  align-items: stretch;
-  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  height: 100%;
-  max-width: 50rem;
-  margin: 0 auto;
-  color: #fff;
 }
 
-h1 {
+.chevron-button {
+  padding: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  left: 50%;
+  right: 0;
+  bottom: 0;
+  width: 100%;
   text-align: center;
-}
-
-button {
+  position: absolute;
   cursor: pointer;
+  transform: translateX(-50%);
 }
 
 .input-form {
@@ -93,22 +100,7 @@ button {
   max-width: 800px;
 }
 
-.input-group {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  width: 100%;
-}
-
-.input-group>.custom-file, .input-group>.custom-select, .input-group>.form-control {
-  position: relative;
-  flex: 1 1 auto;
-  width: 1%;
-  margin-bottom: 0;
-}
-
-.form-control {
+.input-form input {
   display: block;
   width: 100%;
   padding: 0px 8px 0px 8px;
@@ -120,12 +112,17 @@ button {
   border-radius: 4px 0px 0px 4px;
 }
 
-.input-group-append {
-  margin-left: -1px;
+input:active, input:focus {
+  outline: none;
 }
 
-.input-group-append, .input-group-prepend {
-  display: flex;
+input::placeholder {
+  color: #000;
+}
+
+.button-border-full {
+  width: inherit;
+  border-radius: 4px;
 }
 
 .border-none {
@@ -191,14 +188,6 @@ button, input {
   border: 1px solid #000;
 }
 
-input:active, input:focus {
-  outline: none;
-}
-
-input::placeholder {
-  color: #000;
-}
-
 .input-shake {
   animation: shake 0.4s 1 linear;
 }
@@ -224,7 +213,7 @@ input::placeholder {
   }
 }
 
-.svg-github {
+.github-corner {
   fill: #fff;
   color: #000;
   position: absolute;
@@ -251,9 +240,24 @@ input::placeholder {
 
 @media (max-width:500px) {
   .github-corner:hover .octo-arm {
-    animation: nonel
+    animation: none;
   }
   .github-corner .octo-arm {
     animation: octocat-wave 560ms ease-in-out;
+  }
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, to {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(.8, 0, 1, 1)
+  }
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0, .2, 1)
   }
 }
