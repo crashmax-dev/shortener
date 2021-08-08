@@ -17,13 +17,14 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const data = await findUrl(params.slug)
+  const destination = data ? data.url : '/'
 
   return {
     props: {
       data
     },
     redirect: {
-      destination: !data ? '/' : data.url
+      destination
     }
   }
 }
