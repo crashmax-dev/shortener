@@ -9,7 +9,7 @@ import React, {
 import { IUrl } from '~/models/Url'
 import isValidUrl from '~/lib/valid-url'
 import Icon from '~/components/Icons'
-import Clipboard from '~/components/Clipboard'
+import ClipboardButton from '~/components/ClipboardButton'
 
 interface ApiReponse extends Partial<IUrl> {
   ok: boolean
@@ -113,9 +113,7 @@ export default function Index() {
               />
               <div className="input-group-append">
                 {isCopy ?
-                  <Clipboard text={url}>
-                    <Icon.Copy />
-                  </Clipboard>
+                  <ClipboardButton text={url} />
                   :
                   <button onClick={createShorten}>
                     {loading ? <Icon.Loading /> : <Icon.Send />}
@@ -153,12 +151,10 @@ export default function Index() {
                     <p>Created: {new Date(timestamp).toLocaleString()}</p>
                   </div>
                 </button>
-                <Clipboard
+                <ClipboardButton
                   className="border-reverse"
                   text={window.location.href + slug}
-                >
-                  <Icon.Copy />
-                </Clipboard>
+                />
               </div>
             </div>
           </div>

@@ -1,15 +1,4 @@
-export default function Icon() {
-  return null
-}
-
-Icon.Github = Github
-Icon.Loading = Loading
-Icon.Info = Info
-Icon.Copy = Copy
-Icon.Send = Send
-Icon.Check = Check
-
-export function Github() {
+const Github = () => {
   return (
     <a href="https://github.com/crashmax-dev/shortener" target="_blank" className="github-corner" aria-label="View source on GitHub" rel="noreferrer">
       <svg width="80" height="80" viewBox="0 0 250 250" className="svg-github" aria-hidden="true">
@@ -21,7 +10,7 @@ export function Github() {
   )
 }
 
-export function Loading() {
+const Loading = () => {
   return (
     <svg viewBox="0 0 24 24" focusable="false" style={{ width: '26px' }} className="icon">
       <defs>
@@ -47,7 +36,7 @@ export function Loading() {
   )
 }
 
-export function Info() {
+const Info = () => {
   return (
     <svg viewBox="0 0 24 24" focusable="false" style={{ width: '28px' }} className="icon">
       <g fill="currentColor" stroke="currentColor" strokeLinecap="square" strokeWidth="2">
@@ -59,7 +48,7 @@ export function Info() {
   )
 }
 
-export function Copy() {
+const Copy = () => {
   return (
     <svg viewBox="0 0 24 24" focusable="false" style={{ width: '26px' }} className="icon">
       <path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"></path>
@@ -67,7 +56,7 @@ export function Copy() {
   )
 }
 
-export function Send() {
+const Send = () => {
   return (
     <svg viewBox="0 0 24 24" focusable="false" style={{ width: '26px' }} className="icons">
       <path strokeWidth="2" fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
@@ -75,7 +64,7 @@ export function Send() {
   )
 }
 
-export function Check() {
+const Check = () => {
   return (
     <svg viewBox="0 0 14 14" focusable="false" style={{ width: '26px' }} className="icon">
       <g fill="currentColor">
@@ -84,3 +73,14 @@ export function Check() {
     </svg>
   )
 }
+
+const Icon = () => null
+
+Icon.Loading = Loading
+Icon.Info = Info
+Icon.Copy = Copy
+Icon.Send = Send
+Icon.Check = Check
+Icon.Github = Github
+
+export default Icon
