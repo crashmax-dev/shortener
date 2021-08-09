@@ -1,15 +1,8 @@
-import React, {
-  useRef,
-  Fragment,
-  useState,
-  useEffect,
-  KeyboardEvent
-} from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { IUrl } from '~/models/Url'
 import isURL from '~/lib/valid-url'
 import Icon from '~/components/Icons'
-import Header from '~/components/Header'
 import History from '~/components/History'
 import Clipboard from '~/components/Clipboard'
 
@@ -24,7 +17,9 @@ interface FormInputs {
 
 export default function Index() {
   const formRef = useRef<HTMLFormElement>()
+  const historyRef = useRef<HTMLDivElement>()
   const [isHasCopy, setHasCopy] = useState(false)
+  const [isHasLoading, setHasLoading] = useState(false)
   const [history, setHistory] = useState<IUrl[]>([])
 
   const {
@@ -32,8 +27,7 @@ export default function Index() {
     setFocus,
     register,
     getValues,
-    handleSubmit,
-    formState: { isSubmitting }
+    handleSubmit
   } = useForm()
 
   useEffect(() => {
@@ -57,6 +51,8 @@ export default function Index() {
         return shakeInputField()
       }
 
+      setHasLoading(true)
+
       const response = await fetch('/api/shortener', {
         method: 'POST',
         headers: {
@@ -76,6 +72,9 @@ export default function Index() {
       }
     } catch (err) {
       alert(err)
+    } finally {
+      setFocus('url')
+      setHasLoading(false)
     }
   }
 
@@ -84,11 +83,18 @@ export default function Index() {
     window.localStorage.setItem('history', JSON.stringify(history))
   }
 
-  const inputKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+  const inputKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (isHasCopy && e.key === 'Backspace') {
       reset({ url: '' })
       setHasCopy(false)
     }
+  }
+
+  const scrollToHistory = () => {
+    historyRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    })
   }
 
   const shakeInputField = () => {
@@ -96,36 +102,49 @@ export default function Index() {
   }
 
   return (
-    <Fragment>
-      <Header history={history}>
-        <form
-          ref={formRef}
-          className="input-form"
-          onSubmit={handleSubmit(onSubmitForm)}
-        >
-          <input
-            type="text"
-            autoComplete="off"
-            placeholder="Shorten your link"
-            {...register('url')}
-            onKeyDown={inputKeyPress}
-          />
-          {isHasCopy ?
-            <Clipboard text={getValues('url')} />
-            :
-            <button>
-              {isSubmitting ?
-                <Icon.Loading /> :
-                <Icon.Send />
-              }
-            </button>
+    <React.Fragment>
+      <div className="header-container">
+        <Icon.Github />
+        <div className="container">
+          <h1>URL Shortener</h1>
+          <form
+            ref={formRef}
+            className="input-form"
+            onSubmit={handleSubmit(onSubmitForm)}
+          >
+            <input
+              type="text"
+              autoComplete="off"
+              placeholder="Shorten your link"
+              {...register('url')}
+              onKeyDown={inputKeyPress}
+            />
+            {isHasCopy ?
+              <Clipboard text={getValues('url')} />
+              :
+              <button>
+                {isHasLoading ?
+                  <Icon.Loading /> :
+                  <Icon.Send />
+                }
+              </button>
+            }
+          </form>
+          {history.length > 0 &&
+            <div
+              onClick={scrollToHistory}
+              className="chevron-button"
+            >
+              <Icon.Chevron />
+            </div>
           }
-        </form>
-      </Header>
+        </div>
+      </div>
       <History
+        ref={historyRef}
         history={history}
         setHistory={setHistory}
       />
-    </Fragment>
+    </React.Fragment>
   )
 }

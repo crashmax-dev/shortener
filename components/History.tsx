@@ -1,15 +1,15 @@
-import React, { Dispatch, Fragment, KeyboardEvent, MouseEvent } from 'react'
+import React, { forwardRef } from 'react'
 import Icon from './Icons'
 import { IUrl } from '~/models/Url'
 import ClipboardButton from './Clipboard'
 
-export interface HistoryProps {
+interface HistoryProps {
   history: IUrl[]
-  setHistory: Dispatch<React.SetStateAction<IUrl[]>>
+  setHistory: React.Dispatch<React.SetStateAction<IUrl[]>>
 }
 
-const History: React.FC<HistoryProps> = ({ history, setHistory }) => {
-  const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTMLDivElement>) => {
+  const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     e.preventDefault()
   }
 
@@ -17,11 +17,11 @@ const History: React.FC<HistoryProps> = ({ history, setHistory }) => {
     window.open(window.location.href + slug, '_blank')
   }
 
-  const onMouseEnter = (e: MouseEvent<HTMLInputElement>, slug: string) => {
+  const onMouseEnter = (e: React.MouseEvent<HTMLInputElement>, slug: string) => {
     e.currentTarget.value = window.location.href + slug
   }
 
-  const onMouseLeave = (e: MouseEvent<HTMLInputElement>) => {
+  const onMouseLeave = (e: React.MouseEvent<HTMLInputElement>) => {
     e.currentTarget.value = ''
   }
 
@@ -34,45 +34,43 @@ const History: React.FC<HistoryProps> = ({ history, setHistory }) => {
   }
 
   return (
-    <Fragment>
-      {history.length > 0 &&
-        <div className="history-container" id="history">
-          {history.map(({ url, slug, timestamp }, key) => (
-            <div key={key} className="input-form">
-              <input
-                type="text"
-                placeholder={url}
-                onKeyPress={onKeyPress}
-                onClick={() => onClick(slug)}
-                onMouseEnter={e => onMouseEnter(e, slug)}
-                onMouseLeave={onMouseLeave}
-                className="border-reverse pointer"
-              />
-              <button className="tooltip border-none">
-                <Icon.Info />
-                <div className="tooltip-text">
-                  <p>Slug: {slug}</p>
-                  <p>Created: {new Date(timestamp).toLocaleString()}</p>
-                </div>
-              </button>
-              <ClipboardButton
-                className="border-reverse"
-                text={window.location.href + slug}
-              />
+    <div className="history-container" ref={ref}>
+      {history.map(({ url, slug, timestamp }, key) => (
+        <div key={key} className="input-form">
+          <input
+            type="text"
+            placeholder={url}
+            onKeyPress={onKeyPress}
+            onClick={() => onClick(slug)}
+            onMouseEnter={e => onMouseEnter(e, slug)}
+            onMouseLeave={onMouseLeave}
+            className="border-reverse pointer"
+          />
+          <button className="tooltip border-none">
+            <Icon.Info />
+            <div className="tooltip-text">
+              <p>Slug: {slug}</p>
+              <p>Created: {new Date(timestamp).toLocaleString()}</p>
             </div>
-          ))}
-          <div className="input-form">
-            <button
-              onClick={clearHistory}
-              className="button-border-full"
-            >
-              Clear history
-            </button>
-          </div>
+          </button>
+          <ClipboardButton
+            className="border-reverse"
+            text={window.location.href + slug}
+          />
+        </div>
+      ))}
+      {history.length > 0 &&
+        <div className="input-form">
+          <button
+            onClick={clearHistory}
+            className="button-border-full"
+          >
+            Clear history
+          </button>
         </div>
       }
-    </Fragment>
+    </div>
   )
 }
 
-export default History
+export default forwardRef<HTMLDivElement, HistoryProps>(History)
