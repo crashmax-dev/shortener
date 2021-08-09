@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import Icon from './Icons'
 
@@ -13,11 +13,18 @@ const Clipboard: React.FC<ClipboardProps> = ({ text, className }) => {
   const onCopy = () => {
     if (!copied) {
       setCopied(true)
-      setTimeout(() => {
-        setCopied(false)
-      }, 2000)
     }
   }
+
+  useEffect(() => {
+    if (copied) {
+      const timer = setTimeout(() => {
+        setCopied(false)
+      }, 2000)
+
+      return () => clearTimeout(timer)
+    }
+  }, [copied])
 
   return (
     <CopyToClipboard
