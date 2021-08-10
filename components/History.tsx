@@ -59,16 +59,14 @@ const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTM
           />
         </div>
       ))}
-      {history.length > 0 &&
-        <div className="input-form">
-          <button
-            onClick={clearHistory}
-            className="button-border-full border-reverse"
-          >
-            Clear history
-          </button>
-        </div>
-      }
+      <div className="input-form">
+        <button
+          onClick={clearHistory}
+          className="button-border-full border-reverse"
+        >
+          Clear history
+        </button>
+      </div>
     </div>
   )
 }

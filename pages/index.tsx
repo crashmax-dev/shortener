@@ -140,11 +140,13 @@ export default function Index() {
           }
         </div>
       </div>
-      <History
-        ref={historyRef}
-        history={history}
-        setHistory={setHistory}
-      />
+      {history.length > 0 &&
+        <History
+          ref={historyRef}
+          history={history}
+          setHistory={setHistory}
+        />
+      }
     </React.Fragment>
   )
 }
