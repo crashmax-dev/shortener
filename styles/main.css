@@ -27,7 +27,7 @@ button {
 }
 
 p {
-  padding-left: 8px;
+  width: inherit;
   margin: 0;
 }
 
@@ -55,22 +55,35 @@ p::selection {
 .history-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  height: inherit;
   align-items: center;
+  justify-content: center;
   height: inherit;
 }
 
-.history-container .input-form:first-child {
-  padding-top: 32px;
+.history-controls {
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 1rem;
 }
 
-.history-container .input-form:last-child {
+.history-controls>.input-form {
   padding: unset;
-  padding-bottom: 32px;
 }
 
-.history-container .input-form {
+.history-links {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.history-links>.input-form {
   padding: 0px 0px 10px 0px;
+}
+
+.flex-start {
+  justify-content: flex-start;
 }
 
 .container {
@@ -148,8 +161,9 @@ input::placeholder {
 
 .tooltip .tooltip-text {
   visibility: hidden;
-  width: 190px;
-  height: 44px;
+  opacity: 0;
+  width: 200px;
+  height: inherit;
   background-color: #000;
   color: #fff;
   text-align: center;
@@ -160,14 +174,16 @@ input::placeholder {
   right: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  align-items: flex-start;
+  justify-content: center;
   font-size: 12px;
   user-select: text;
+  transition: opacity 0.2s, visibility 0s linear 0.2s;
 }
 
 .tooltip:hover .tooltip-text {
+  opacity: 1;
   visibility: visible;
+  transition-delay: 0s;
 }
 
 button, input {

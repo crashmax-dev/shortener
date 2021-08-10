@@ -29,43 +29,47 @@ const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTM
     const isConfirm = confirm('Are you sure?')
     if (isConfirm) {
       setHistory([])
-      window.localStorage.setItem('history', '[]')
+      window.localStorage.removeItem('history')
     }
   }
 
   return (
     <div className="history-container" ref={ref}>
-      {history.map(({ url, slug, timestamp }, key) => (
-        <div key={key} className="input-form">
-          <input
-            type="text"
-            placeholder={url}
-            onKeyPress={onKeyPress}
-            onClick={() => onClick(slug)}
-            onMouseEnter={e => onMouseEnter(e, slug)}
-            onMouseLeave={onMouseLeave}
-            className="border-reverse pointer"
-          />
-          <button className="tooltip border-none">
-            <Icon.Info />
-            <div className="tooltip-text">
-              <p>Slug: {slug}</p>
-              <p>Created: {new Date(timestamp).toLocaleString()}</p>
-            </div>
+      <div className="history-links">
+        {history.map(({ url, slug, timestamp }, key) => (
+          <div key={key} className="input-form">
+            <input
+              type="text"
+              placeholder={url}
+              onKeyPress={onKeyPress}
+              onClick={() => onClick(slug)}
+              onMouseEnter={e => onMouseEnter(e, slug)}
+              onMouseLeave={onMouseLeave}
+              className="border-reverse pointer"
+            />
+            <button className="tooltip border-none">
+              <Icon.Info />
+              <div className="tooltip-text">
+                <p>Slug: {slug}</p>
+                <p>Created: {new Date(timestamp).toLocaleString()}</p>
+              </div>
+            </button>
+            <ClipboardButton
+              className="border-reverse"
+              text={window.location.href + slug}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="history-controls">
+        <div className="input-form">
+          <button
+            onClick={clearHistory}
+            className="button-border-full border-reverse"
+          >
+            Clear history
           </button>
-          <ClipboardButton
-            className="border-reverse"
-            text={window.location.href + slug}
-          />
         </div>
-      ))}
-      <div className="input-form">
-        <button
-          onClick={clearHistory}
-          className="button-border-full border-reverse"
-        >
-          Clear history
-        </button>
       </div>
     </div>
   )
