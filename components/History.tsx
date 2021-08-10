@@ -1,4 +1,5 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useState } from 'react'
+import { usePagination } from 'react-use-pagination'
 import Icon from './Icons'
 import { IUrl } from '~/models/Url'
 import ClipboardButton from './Clipboard'
@@ -9,6 +10,22 @@ interface HistoryProps {
 }
 
 const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTMLDivElement>) => {
+  const [data, setData] = useState<IUrl[]>(history)
+
+  const {
+    currentPage,
+    totalPages,
+    setNextPage,
+    setPreviousPage,
+    nextEnabled,
+    previousEnabled,
+    startIndex,
+    endIndex
+  } = usePagination({
+    initialPageSize: 10,
+    totalItems: data.length + 1
+  })
+
   const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     e.preventDefault()
   }
@@ -36,7 +53,7 @@ const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTM
   return (
     <div className="history-container" ref={ref}>
       <div className="history-links">
-        {history.map(({ url, slug, timestamp }, key) => (
+        {data.slice(startIndex, endIndex).map(({ url, slug, timestamp }, key) => (
           <div key={key} className="input-form">
             <input
               type="text"
@@ -62,6 +79,25 @@ const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTM
         ))}
       </div>
       <div className="history-controls">
+        <div className="pagination input-form">
+          <button
+            className="button-border-full border-reverse"
+            onClick={setPreviousPage}
+            disabled={!previousEnabled}
+          >
+            <Icon.ChevronLeft />
+          </button>
+          <button className="button-border-full border-reverse">
+            {currentPage + 1} / {totalPages}
+          </button>
+          <button
+            className="button-border-full border-reverse"
+            onClick={setNextPage}
+            disabled={!nextEnabled}
+          >
+            <Icon.ChevronRight />
+          </button>
+        </div>
         <div className="input-form">
           <button
             onClick={clearHistory}

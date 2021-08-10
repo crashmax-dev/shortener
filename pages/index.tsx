@@ -67,6 +67,10 @@ export default function Index() {
         reset({ url: window.location.href + data.slug })
         addToHistory(data)
         setHasCopy(true)
+
+        if (history.length === 1) {
+          scrollToHistory()
+        }
       } else {
         shakeInputField()
       }
@@ -135,7 +139,7 @@ export default function Index() {
               onClick={scrollToHistory}
               className="chevron-button"
             >
-              <Icon.Chevron />
+              <Icon.ChevronDown />
             </div>
           }
         </div>

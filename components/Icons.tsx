@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 const Github = () => (
   <a href="https://github.com/crashmax-dev/shortener" target="_blank" className="github-corner" aria-label="View source on GitHub" rel="noreferrer">
@@ -56,7 +56,7 @@ const Copy = () => (
 )
 
 const Send = () => (
-  <svg viewBox="0 0 24 24" style={{ width: '26px', height: '24.75px' }} className="icon">
+  <svg viewBox="0 0 24 24" style={{ width: '26px', height: '26px' }} className="icon">
     <path strokeWidth="2" fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
   </svg>
 )
@@ -69,7 +69,7 @@ const Check = () => (
   </svg>
 )
 
-const Chevron = () => (
+const ChevronDown = () => (
   <svg viewBox="0 0 40 40" style={{ width: '22px', height: '22px' }} className="icon animate-bounce">
     <g fill="currentColor">
       <path d="M35.3 12L20 21.8893L4.7 12L0 15.0445L20 28L40 15.0445L35.3 12Z" />
@@ -77,14 +77,28 @@ const Chevron = () => (
   </svg>
 )
 
+const ChevronRight = () => (
+  <svg viewBox="0 0 24 24" className="icon">
+    <path fill="currentColor" d="M8.90283 4L7 5.88L13.1808 12L7 18.12L8.90283 20L17 12L8.90283 4Z" />
+  </svg>
+)
+
+const ChevronLeft = () => (
+  <svg viewBox="0 0 24 24" className="icon">
+    <path fill="currentColor" d="M17 5.88L15.0972 4L7 12L15.0972 20L17 18.12L10.8192 12L17 5.88Z" />
+  </svg>
+)
+
 const Icon = () => null
 
 Icon.Github = Github
 Icon.Loading = Loading
-Icon.Info = Info
-Icon.Copy = Copy
+Icon.Info = memo(Info)
+Icon.Copy = memo(Copy)
 Icon.Send = Send
-Icon.Check = Check
-Icon.Chevron = Chevron
+Icon.Check = memo(Check)
+Icon.ChevronDown = ChevronDown
+Icon.ChevronRight = memo(ChevronRight)
+Icon.ChevronLeft = memo(ChevronLeft)
 
 export default Icon

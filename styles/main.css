@@ -26,6 +26,10 @@ button {
   cursor: pointer;
 }
 
+button:disabled {
+  cursor: not-allowed;
+}
+
 p {
   width: inherit;
   margin: 0;
@@ -62,10 +66,6 @@ p::selection {
 }
 
 .history-controls {
-  height: inherit;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
   padding-bottom: 1rem;
 }
 
@@ -76,6 +76,10 @@ p::selection {
 .history-links {
   padding-top: 1rem;
   padding-bottom: 1rem;
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .history-links>.input-form {
@@ -120,6 +124,16 @@ p::selection {
   background-color: #fff;
   background-clip: padding-box;
   border-radius: 4px 0px 0px 4px;
+  text-decoration: none;
+}
+
+.pagination {
+  padding-bottom: 10px !important;
+}
+
+.pagination>button:nth-child(2) {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 input:active, input:focus {
