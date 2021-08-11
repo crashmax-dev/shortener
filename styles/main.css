@@ -74,16 +74,39 @@ p::selection {
 }
 
 .history-links {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   height: inherit;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  flex-grow: 1;
+  overflow: auto;
+  min-height: 0;
+}
+
+.history-links::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-shadow {
+  background: linear-gradient(#ffffff 33%, rgba(255, 255, 255, 0)), linear-gradient(rgba(255, 255, 255, 0), #ffffff 66%) 0 100%, radial-gradient(farthest-side at 50% 0, rgba(160, 156, 156, 0.5), rgba(0, 0, 0, 0)), radial-gradient(farthest-side at 50% 100%, rgba(160, 156, 156, 0.5), rgba(0, 0, 0, 0)) 0 100%;
+  background-color: #ffffff;
+  background-repeat: no-repeat;
+  background-attachment: local, local, scroll, scroll;
+  background-size: 100% 33px, 100% 33px, 100% 11px, 100% 11px;
+}
+
+.link-item {
+  background-color: transparent !important;
 }
 
 .history-links>.input-form {
   padding: 0px 0px 10px 0px;
+}
+
+.history-links>.input-form:last-child {
+  padding: unset;
 }
 
 .flex-start {

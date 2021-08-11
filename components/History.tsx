@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react'
+import React, { forwardRef } from 'react'
 import { usePagination } from 'react-use-pagination'
 import Icon from './Icons'
 import { IUrl } from '~/models/Url'
@@ -10,8 +10,6 @@ interface HistoryProps {
 }
 
 const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTMLDivElement>) => {
-  const [data, setData] = useState<IUrl[]>(history)
-
   const {
     currentPage,
     totalPages,
@@ -22,9 +20,14 @@ const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTM
     startIndex,
     endIndex
   } = usePagination({
-    initialPageSize: 10,
-    totalItems: data.length + 1
+    initialPageSize: 20,
+    totalItems: history.length
   })
+
+  const currentItems = history.slice(
+    startIndex,
+    endIndex + 1
+  )
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     e.preventDefault()
@@ -52,8 +55,8 @@ const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTM
 
   return (
     <div className="history-container" ref={ref}>
-      <div className="history-links">
-        {data.slice(startIndex, endIndex).map(({ url, slug, timestamp }, key) => (
+      <div className="history-links scroll-shadow">
+        {currentItems.map(({ url, slug, timestamp }, key) => (
           <div key={key} className="input-form">
             <input
               type="text"
@@ -62,7 +65,7 @@ const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTM
               onClick={() => onClick(slug)}
               onMouseEnter={e => onMouseEnter(e, slug)}
               onMouseLeave={onMouseLeave}
-              className="border-reverse pointer"
+              className="link-item border-reverse pointer"
             />
             <button className="tooltip border-none">
               <Icon.Info />
