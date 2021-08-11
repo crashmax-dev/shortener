@@ -67,13 +67,6 @@ const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTM
               onMouseLeave={onMouseLeave}
               className="link-item border-reverse pointer"
             />
-            <button className="tooltip border-none">
-              <Icon.Info />
-              <div className="tooltip-text">
-                <p>Slug: {slug}</p>
-                <p>Created: {new Date(timestamp).toLocaleString()}</p>
-              </div>
-            </button>
             <ClipboardButton
               className="border-reverse"
               text={window.location.href + slug}
