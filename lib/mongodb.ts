@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, { ConnectOptions } from 'mongoose'
 
 const MONGODB_URI = process.env.MONGODB_URI
 
@@ -25,8 +25,8 @@ export async function connectToDatabase() {
   }
 
   if (!cached.promise) {
-    const opts = {
-      useFindAndModify: true,
+    const opts: ConnectOptions = {
+      useFindAndModify: false,
       useUnifiedTopology: true,
       useCreateIndex: true,
       useNewUrlParser: true

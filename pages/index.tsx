@@ -82,8 +82,8 @@ export default function Index() {
     }
   }
 
-  const addToHistory = ({ url, slug, timestamp }: ApiReponse) => {
-    history.unshift({ url, slug, timestamp })
+  const addToHistory = ({ url, slug, visitors, timestamp }: ApiReponse) => {
+    history.unshift({ url, slug, visitors, timestamp })
     window.localStorage.setItem('history', JSON.stringify(history))
   }
 
