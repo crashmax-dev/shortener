@@ -1,7 +1,8 @@
 import Icon from '~/components/Icons'
 import { findUrl } from './api/shortener'
+import { NextPage } from 'next'
 
-export default function Slug() {
+const Slug: NextPage = () => {
   return (
     <div className="header-container">
       <Icon.Loading width="46px" height="46px" />
@@ -9,23 +10,13 @@ export default function Slug() {
   )
 }
 
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true
-  }
+Slug.getInitialProps = async ({ res, query }) => {
+  const data = await findUrl(query.slug as string)
+  const location = data ? data.url : '/'
+
+  res.writeHead(307, {
+    Location: location
+  }).end()
 }
 
-export async function getStaticProps({ params }) {
-  const data = await findUrl(params.slug)
-  const destination = data ? data.url : '/'
-
-  return {
-    props: {
-      data
-    },
-    redirect: {
-      destination
-    }
-  }
-}
+export default Slug

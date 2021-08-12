@@ -62,12 +62,11 @@ const response = (res: NextApiResponse, code: number, { url, slug, timestamp }: 
 
 export const findUrl = async (slug: string): Promise<IUrl | null> => {
   await connectToDatabase()
-
-  const filter = { slug }
-  const update = { $inc: { visitors: 1 } }
-  const options = { new: true }
-
-  return await Url.findOneAndUpdate(filter, update, options).exec()
+  return await Url.findOneAndUpdate(
+    { slug },
+    { $inc: { visitors: 1 } },
+    { new: true }
+  )
 }
 
 export const createUrl = async (url: string): Promise<IUrl> => {
