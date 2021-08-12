@@ -67,11 +67,7 @@ export const findUrl = async (slug: string): Promise<IUrl | null> => {
   const update = { $inc: { visitors: 1 } }
   const options = { new: true }
 
-  return await Url.findOneAndUpdate(filter, update, options, (err, response) => {
-    if (!err) {
-      return response
-    }
-  })
+  return await Url.findOneAndUpdate(filter, update, options)
 }
 
 export const createUrl = async (url: string): Promise<IUrl> => {

@@ -3,6 +3,7 @@ import { usePagination } from 'react-use-pagination'
 import Icon from './Icons'
 import { IUrl } from '~/models/Url'
 import ClipboardButton from './Clipboard'
+import Popup from 'reactjs-popup'
 
 interface HistoryProps {
   history: IUrl[]
@@ -67,6 +68,21 @@ const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTM
               onMouseLeave={onMouseLeave}
               className="link-item border-reverse pointer"
             />
+            <Popup
+              arrow={false}
+              position="left center"
+              on="hover"
+              closeOnDocumentClick
+              trigger={
+                <button className="radius-reset border-reverse">
+                  <Icon.Info />
+                </button>
+              }
+            >
+              {slug}
+              {/* <p>Slug: {slug}</p>
+              <p>Created: {new Date(timestamp).toLocaleString()}</p> */}
+            </Popup>
             <ClipboardButton
               className="border-reverse"
               text={window.location.href + slug}
