@@ -2,9 +2,9 @@ import React, { useRef, useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { IUrl } from '~/models/Url'
 import isURL from '~/lib/valid-url'
-import Icon from '~/components/Icons'
 import History from '~/components/History'
 import Clipboard from '~/components/Clipboard'
+import GithubCorner from '~/components/GithubCorner'
 
 interface ApiReponse extends Partial<IUrl> {
   ok: boolean
@@ -108,7 +108,7 @@ export default function Index() {
   return (
     <React.Fragment>
       <div className="header-container">
-        <Icon.Github />
+        <GithubCorner />
         <div className="container">
           <h1>URL Shortener</h1>
           <form
