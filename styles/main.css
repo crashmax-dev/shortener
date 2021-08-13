@@ -30,6 +30,10 @@ button:disabled {
   cursor: not-allowed;
 }
 
+button:focus {
+  outline-style: none;
+}
+
 p {
   width: inherit;
   margin: 0;
@@ -169,7 +173,11 @@ input::placeholder {
 
 .button-border-full {
   width: inherit;
-  border-radius: 4px;
+  border-radius: 4px !important;
+}
+
+.radius-reset {
+  border-radius: 0px !important;
 }
 
 .pointer {
@@ -185,10 +193,9 @@ input::placeholder {
   vertical-align: middle;
 }
 
-button, input {
+.history-controls button, .form-button, input {
   height: 44px;
   padding: 8px;
-  font-size: 14px;
   border-radius: 0px 4px 4px 0px;
   font-family: inherit;
   color: #fff;
@@ -197,7 +204,7 @@ button, input {
 }
 
 .border-reverse {
-  border: 1px solid #000;
+  border: 1px solid #000 !important;
 }
 
 .input-shake {
@@ -271,5 +278,71 @@ button, input {
   50% {
     transform: none;
     animation-timing-function: cubic-bezier(0, 0, .2, 1);
+  }
+}
+
+.popup-content {
+  margin: auto;
+  background: #000;
+  width: 44px;
+  animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+}
+
+.popup-content>button {
+  padding: 8px;
+  height: inherit;
+  color: #fff;
+  background: #000;
+  border: 1px solid #000;
+}
+
+.popup-content>button:first-child {
+  border-radius: 4px 0px 0px 4px;
+}
+
+[role=tooltip].popup-content {
+  width: inherit;
+  height: 44px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, .16);
+  border-radius: 4px 0px 0px 4px;
+  color: #fff;
+}
+
+.popup-overlay {
+  background: rgba(0, 0, 0, .5);
+}
+
+[data-popup=tooltip].popup-overlay {
+  background: transparent;
+}
+
+.popup-arrow {
+  filter: drop-shadow(0 -3px 3px rgba(0, 0, 0, .16));
+  color: #000;
+  stroke-width: 2px;
+  stroke: #000;
+  stroke-dasharray: 30px;
+  stroke-dashoffset: -54px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+@keyframes anvil {
+  0% {
+    transform: translateX(0px);
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+  }
+  1% {
+    transform: translateX(10px);
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+  }
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+    box-shadow: 0 0 500px rgba(241, 241, 241, 0);
   }
 }

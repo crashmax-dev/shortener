@@ -1,8 +1,9 @@
 import React, { forwardRef } from 'react'
 import { usePagination } from 'react-use-pagination'
-import { ChevronLeftIcon, ChevronRightIcon } from './Icons'
+import { ChevronLeftIcon, ChevronRightIcon, DeleteIcon, InfoIcon, MenuIcon } from './Icons'
 import { IUrl } from '~/models/Url'
 import ClipboardButton from './Clipboard'
+import Popup from 'reactjs-popup'
 
 interface HistoryProps {
   history: IUrl[]
@@ -67,10 +68,25 @@ const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTM
               onMouseLeave={onMouseLeave}
               className="link-item border-reverse pointer"
             />
-            <ClipboardButton
-              className="border-reverse"
-              text={window.location.href + slug}
-            />
+            <Popup
+              arrow={false}
+              position="left center"
+              on="hover"
+              closeOnDocumentClick
+              trigger={
+                <button className="form-button border-reverse">
+                  <MenuIcon />
+                </button>
+              }
+            >
+              <button>
+                <InfoIcon />
+              </button>
+              <button>
+                <DeleteIcon />
+              </button>
+              <ClipboardButton text={window.location.href + slug} />
+            </Popup>
           </div>
         ))}
       </div>

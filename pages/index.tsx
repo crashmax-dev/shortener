@@ -127,7 +127,7 @@ export default function Index() {
             {isHasCopy ?
               <Clipboard text={getValues('url')} />
               :
-              <button>
+              <button className="form-button">
                 {isHasLoading ?
                   <LoadingIcon /> :
                   <ArrowRightIcon />
