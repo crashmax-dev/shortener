@@ -39,16 +39,6 @@ export const Loading: React.FC<LoadingIconProps> = ({ width, height }) => (
   </svg>
 )
 
-const Info = () => (
-  <svg viewBox="0 0 24 24" style={{ width: '28px' }} className="icon">
-    <g fill="currentColor" stroke="currentColor" strokeLinecap="square" strokeWidth="2">
-      <circle cx="12" cy="12" fill="none" r="11" stroke="currentColor"></circle>
-      <line fill="none" x1="11.959" x2="11.959" y1="11" y2="17"></line>
-      <circle cx="11.959" cy="7" r="1" stroke="none"></circle>
-    </g>
-  </svg>
-)
-
 const Copy = () => (
   <svg viewBox="0 0 24 24" style={{ width: '26px' }} className="icon">
     <path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"></path>
@@ -93,7 +83,6 @@ const Icon = () => null
 
 Icon.Github = Github
 Icon.Loading = Loading
-Icon.Info = memo(Info)
 Icon.Copy = memo(Copy)
 Icon.Send = Send
 Icon.Check = memo(Check)
