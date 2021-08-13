@@ -24,9 +24,9 @@ export default function Index() {
   const [history, setHistory] = useState<IUrl[]>([])
 
   const {
-    reset,
-    setFocus,
     register,
+    setFocus,
+    setValue,
     getValues,
     handleSubmit
   } = useForm()
@@ -65,7 +65,7 @@ export default function Index() {
       const data: ApiReponse = await response.json()
 
       if (data.ok) {
-        reset({ url: window.location.href + data.slug })
+        setValue('url', window.location.href + data.slug)
         addToHistory(data)
         setHasCopy(true)
 
@@ -88,9 +88,9 @@ export default function Index() {
     window.localStorage.setItem('history', JSON.stringify(history))
   }
 
-  const inputKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (isHasCopy && e.key === 'Backspace') {
-      reset({ url: '' })
+  const formOnChange = () => {
+    if (isHasCopy) {
+      setValue('url', '')
       setHasCopy(false)
     }
   }
@@ -116,13 +116,13 @@ export default function Index() {
             ref={formRef}
             className="input-form"
             onSubmit={handleSubmit(onSubmitForm)}
+            onChange={formOnChange}
           >
             <input
               type="text"
               autoComplete="off"
               placeholder="Shorten your link"
               {...register('url')}
-              onKeyDown={inputKeyPress}
             />
             {isHasCopy ?
               <Clipboard text={getValues('url')} />
