@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import { usePagination } from 'react-use-pagination'
-import Icon from './Icons'
+import { ChevronLeftIcon, ChevronRightIcon } from './Icons'
 import { IUrl } from '~/models/Url'
 import ClipboardButton from './Clipboard'
 
@@ -81,7 +81,7 @@ const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTM
             onClick={setPreviousPage}
             disabled={!previousEnabled}
           >
-            <Icon.ChevronLeft />
+            <ChevronLeftIcon />
           </button>
           <button className="button-border-full border-reverse">
             {currentPage + 1} / {totalPages}
@@ -91,7 +91,7 @@ const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTM
             onClick={setNextPage}
             disabled={!nextEnabled}
           >
-            <Icon.ChevronRight />
+            <ChevronRightIcon />
           </button>
         </div>
         <div className="input-form">
@@ -99,7 +99,7 @@ const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTM
             onClick={clearHistory}
             className="button-border-full border-reverse"
           >
-            Clear history
+            Clear History
           </button>
         </div>
       </div>

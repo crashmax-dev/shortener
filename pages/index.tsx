@@ -5,6 +5,7 @@ import isURL from '~/lib/valid-url'
 import History from '~/components/History'
 import Clipboard from '~/components/Clipboard'
 import GithubCorner from '~/components/GithubCorner'
+import { ArrowRightIcon, ChevronDownIcon, LoadingIcon } from '~/components/Icons'
 
 interface ApiReponse extends Partial<IUrl> {
   ok: boolean
@@ -128,8 +129,8 @@ export default function Index() {
               :
               <button>
                 {isHasLoading ?
-                  <Icon.Loading /> :
-                  <Icon.Send />
+                  <LoadingIcon /> :
+                  <ArrowRightIcon />
                 }
               </button>
             }
@@ -139,7 +140,7 @@ export default function Index() {
               onClick={scrollToHistory}
               className="chevron-button"
             >
-              <Icon.ChevronDown />
+              <ChevronDownIcon />
             </div>
           }
         </div>

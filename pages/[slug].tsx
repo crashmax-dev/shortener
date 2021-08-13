@@ -1,11 +1,11 @@
-import { Loading } from '~/components/Icons'
+import { LoadingIcon } from '~/components/Icons'
 import { findUrl } from './api/shortener'
 import { NextPage } from 'next'
 
 const Slug: NextPage = () => {
   return (
     <div className="header-container">
-      <Loading width="46px" height="46px" />
+      <LoadingIcon width="46px" height="46px" />
     </div>
   )
 }

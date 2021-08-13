@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
-import Icon from './Icons'
+import { CheckIcon, CopyIcon } from './Icons'
 
 interface ClipboardProps {
   text: string
@@ -33,8 +33,8 @@ const Clipboard: React.FC<ClipboardProps> = ({ text, className }) => {
     >
       <button className={className}>
         {copied ?
-          <Icon.Check /> :
-          <Icon.Copy />
+          <CheckIcon /> :
+          <CopyIcon />
         }
       </button>
     </CopyToClipboard>
