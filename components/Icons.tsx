@@ -99,7 +99,6 @@ export {
   ChevronDownIcon,
   ChevronRightIcon,
   ChevronLeftIcon,
-  InfoIcon,
   MenuIcon,
   DeleteIcon
 }
