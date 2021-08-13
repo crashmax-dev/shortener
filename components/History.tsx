@@ -54,6 +54,15 @@ const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTM
     }
   }
 
+  const deleteUrl = (slug: string) => {
+    const isConfirm = confirm('Delete?')
+    if (isConfirm) {
+      const newHistory = history.filter((url) => url.slug !== slug)
+      setHistory(newHistory)
+      window.localStorage.setItem('history', JSON.stringify(newHistory))
+    }
+  }
+
   return (
     <div className="history-container" ref={ref}>
       <div className="history-links scroll-shadow">
@@ -82,7 +91,7 @@ const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTM
               <button>
                 <InfoIcon />
               </button>
-              <button>
+              <button onClick={() => deleteUrl(slug)}>
                 <DeleteIcon />
               </button>
               <ClipboardButton text={window.location.href + slug} />
