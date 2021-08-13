@@ -69,16 +69,6 @@ const ChevronLeftIcon = memo(() => (
   </svg>
 ))
 
-const InfoIcon = () => (
-  <svg viewBox="0 0 24 24" style={{ width: '26px' }} className="icon">
-    <g fill="currentColor" stroke="currentColor" strokeLinecap="square" strokeWidth="2">
-      <circle cx="12" cy="12" fill="none" r="11" stroke="currentColor"></circle>
-      <line fill="none" x1="11.959" x2="11.959" y1="11" y2="17"></line>
-      <circle cx="11.959" cy="7" r="1" stroke="none"></circle>
-    </g>
-  </svg>
-)
-
 const MenuIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" style={{ width: '26px', height: '26px' }} className="icons">
     <circle cx="12" cy="5" r="2" fill="white" />

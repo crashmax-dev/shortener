@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import { usePagination } from 'react-use-pagination'
-import { ChevronLeftIcon, ChevronRightIcon, DeleteIcon, InfoIcon, MenuIcon } from './Icons'
+import { ChevronLeftIcon, ChevronRightIcon, DeleteIcon, MenuIcon } from './Icons'
 import { IUrl } from '~/models/Url'
 import ClipboardButton from './Clipboard'
 import Popup from 'reactjs-popup'
@@ -66,7 +66,7 @@ const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTM
   return (
     <div className="history-container" ref={ref}>
       <div className="history-links scroll-shadow">
-        {currentItems.map(({ url, slug, timestamp }, key) => (
+        {currentItems.map(({ url, slug }, key) => (
           <div key={key} className="input-form">
             <input
               type="text"
@@ -78,6 +78,7 @@ const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTM
               className="link-item border-reverse pointer"
             />
             <Popup
+              nested
               arrow={false}
               position="left center"
               on="hover"
@@ -88,9 +89,6 @@ const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTM
                 </button>
               }
             >
-              <button>
-                <InfoIcon />
-              </button>
               <button onClick={() => deleteUrl(slug)}>
                 <DeleteIcon />
               </button>
