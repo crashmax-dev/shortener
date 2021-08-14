@@ -72,6 +72,6 @@ export const findUrl = async (slug: string): Promise<IUrl | null> => {
 export const createUrl = async (url: string): Promise<IUrl> => {
   await connectToDatabase()
   return await Url.create({
-    url: url.trim().toLowerCase()
+    url: url.trim()
   })
 }
