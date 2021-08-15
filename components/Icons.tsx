@@ -69,14 +69,6 @@ const ChevronLeftIcon = memo(() => (
   </svg>
 ))
 
-const MenuIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" style={{ width: '26px', height: '26px' }} className="icons">
-    <circle cx="12" cy="5" r="2" fill="white" />
-    <circle cx="12" cy="12" r="2" fill="white" />
-    <circle cx="12" cy="19" r="2" fill="white" />
-  </svg>
-)
-
 const DeleteIcon = () => (
   <svg viewBox="0 0 24 24" style={{ width: '26px' }} className="icon">
     <g fill="currentColor">
@@ -99,6 +91,5 @@ export {
   ChevronDownIcon,
   ChevronRightIcon,
   ChevronLeftIcon,
-  MenuIcon,
   DeleteIcon
 }
