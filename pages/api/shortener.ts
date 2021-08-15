@@ -51,12 +51,12 @@ export default async function shortener(req: NextApiRequest, res: NextApiRespons
   res.status(400).json({ ok: false })
 }
 
-const response = (res: NextApiResponse, code: number, { url, slug, timestamp }: IUrl) => {
+const response = (res: NextApiResponse, code: number, { url, slug, created_at }: IUrl) => {
   return res.status(code).json({
     ok: true,
     url,
     slug,
-    timestamp
+    created_at
   })
 }
 

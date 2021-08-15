@@ -5,7 +5,7 @@ export interface IUrl {
   url: string
   slug: string
   visitors: number
-  timestamp: number
+  created_at: number
 }
 
 const UrlSchema = new Schema({
@@ -15,13 +15,13 @@ const UrlSchema = new Schema({
   },
   slug: {
     type: String,
-    default: () => crypto.randomBytes(4).toString('hex')
+    default: () => crypto.randomBytes(5).toString('hex')
   },
   visitors: {
     type: Number,
     default: 0
   },
-  timestamp: {
+  created_at: {
     type: Date,
     default: Date.now
   }
