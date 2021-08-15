@@ -88,7 +88,7 @@ p::selection {
 
 .history-links input {
   z-index: 2;
-  text-indent: 26px;
+  padding: 0px 8px 0px 34px !important;
   background-color: transparent !important;
 }
 
