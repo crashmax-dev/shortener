@@ -83,10 +83,21 @@ p::selection {
   flex-grow: 1;
   overflow: auto;
   min-height: 0;
+  position: relative;
 }
 
 .history-links input {
+  z-index: 2;
+  text-indent: 26px;
   background-color: transparent !important;
+}
+
+.history-links img {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 10px;
+  z-index: 1;
 }
 
 .history-links::-webkit-scrollbar {

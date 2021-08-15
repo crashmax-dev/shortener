@@ -67,6 +67,10 @@ const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTM
       <div className="history-links scroll-shadow">
         {currentItems.map(({ url, slug }, key) => (
           <div key={key} className="input-form">
+            <img
+              src={`https://icons.duckduckgo.com/ip3/${new URL(url).hostname}.ico`}
+              alt={url}
+            />
             <input
               type="text"
               defaultValue={url}
