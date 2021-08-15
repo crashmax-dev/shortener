@@ -41,8 +41,8 @@ const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTM
     e.currentTarget.value = window.location.href + slug
   }
 
-  const onMouseLeave = (e: React.MouseEvent<HTMLInputElement>, url: string) => {
-    e.currentTarget.value = url
+  const onMouseLeave = (e: React.MouseEvent<HTMLInputElement>) => {
+    e.currentTarget.value = ''
   }
 
   const clearHistory = () => {
@@ -73,11 +73,11 @@ const History = ({ history, setHistory }: HistoryProps, ref: React.LegacyRef<HTM
             />
             <input
               type="text"
-              defaultValue={url}
+              placeholder={url}
               onKeyDown={onKeyPress}
               onClick={() => onClick(slug)}
               onMouseEnter={e => onMouseEnter(e, slug)}
-              onMouseLeave={e => onMouseLeave(e, url)}
+              onMouseLeave={onMouseLeave}
               className="border-reverse pointer"
             />
             <button
