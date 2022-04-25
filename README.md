@@ -24,3 +24,12 @@ Create a `.env` file similar to [`.env.example`](https://github.com/crashmax-dev
 - [Next.js](https://nextjs.org)
 - [Vercel](https://vercel.com)
 - [MongoDB](https://mongodb.com)
+
+## TODO
+
+- Создание личного кабинета (работа с JWT)
+- Добавить удаление ссылок из базы данных
+- Выводить на клиенте информацию о ссылке (количество переходов, дата создания)
+- Доработать передачу дополнительных параметров (slug/query) в ссылку при перенаправлении
+- Добавить опциональный input для кастомного slug'a
+- Доработать design
