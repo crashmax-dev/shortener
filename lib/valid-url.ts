@@ -22,7 +22,7 @@ const testURL = (value: string, host?: string) => {
     return validator.isURL(value, {
       protocols: ['http', 'https']
     })
-  } catch (_) {
+  } catch {
     return false
   }
 }

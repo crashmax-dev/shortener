@@ -1,4 +1,5 @@
-import mongoose, { ConnectOptions } from 'mongoose'
+import mongoose from 'mongoose'
+import type { ConnectOptions } from 'mongoose'
 
 const MONGODB_URI = process.env.MONGODB_URI
 
@@ -13,10 +14,10 @@ if (!MONGODB_URI) {
  * in development. This prevents connections growing exponentially
  * during API Route usage.
  */
-let cached = global.mongoose
+let cached = (global as any).mongoose
 
 if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null }
+  cached = (global as any).mongoose = { conn: null, promise: null }
 }
 
 export async function connectToDatabase() {
@@ -26,19 +27,20 @@ export async function connectToDatabase() {
 
   if (!cached.promise) {
     const opts: ConnectOptions = {
-      useFindAndModify: false,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useNewUrlParser: true
+      bufferCommands: false,
     }
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((client) => {
-      return client
+    cached.promise = mongoose.connect(MONGODB_URI!, opts).then((mongoose) => {
+      return mongoose
     })
   }
 
-  cached.conn = await cached.promise
+  try {
+    cached.conn = await cached.promise
+  } catch (e) {
+    cached.promise = null
+    throw e
+  }
+
   return cached.conn
 }
-
-export default connectToDatabase

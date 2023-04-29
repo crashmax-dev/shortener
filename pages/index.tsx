@@ -17,8 +17,8 @@ interface FormInputs {
 }
 
 export default function Index() {
-  const formRef = useRef<HTMLFormElement>()
-  const historyRef = useRef<HTMLDivElement>()
+  const formRef = useRef<HTMLFormElement>(null)
+  const historyRef = useRef<HTMLDivElement>(null)
   const [isHasCopy, setHasCopy] = useState(false)
   const [isHasLoading, setHasLoading] = useState(false)
   const [history, setHistory] = useState<IUrl[]>([])
@@ -35,8 +35,8 @@ export default function Index() {
     const data = window.localStorage.getItem('history')
     data && setHistory(JSON.parse(data))
 
-    formRef.current.addEventListener('animationend', () => {
-      formRef.current.classList.remove('input-shake')
+    formRef.current!.addEventListener('animationend', () => {
+      formRef.current!.classList.remove('input-shake')
     })
 
     setFocus('url')
@@ -83,8 +83,8 @@ export default function Index() {
     }
   }
 
-  const addToHistory = ({ url, slug, visitors, created_at }: ApiReponse) => {
-    history.unshift({ url, slug, visitors, created_at })
+  const addToHistory = (response: any) => {
+    history.unshift(response)
     window.localStorage.setItem('history', JSON.stringify(history))
   }
 
@@ -96,14 +96,14 @@ export default function Index() {
   }
 
   const scrollToHistory = () => {
-    historyRef.current.scrollIntoView({
+    historyRef.current!.scrollIntoView({
       behavior: 'smooth',
       block: 'start'
     })
   }
 
   const shakeInputField = () => {
-    formRef.current.classList.add('input-shake')
+    formRef.current!.classList.add('input-shake')
   }
 
   return (
@@ -115,6 +115,7 @@ export default function Index() {
           <form
             ref={formRef}
             className="input-form"
+            // @ts-ignore
             onSubmit={handleSubmit(onSubmitForm)}
             onChange={formOnChange}
           >

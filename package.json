@@ -1,5 +1,6 @@
 {
-  "name": "ie.vercel.app",
+  "name": "shortener",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next",
@@ -7,28 +8,22 @@
     "start": "next start"
   },
   "dependencies": {
-    "lru-cache": "^6.0.0",
-    "mongoose": "^5.13.9",
-    "next": "^11.1.2",
-    "postcss": "^8.3.6",
-    "react": "^17.0.2",
-    "react-copy-to-clipboard": "^5.0.4",
-    "react-dom": "^17.0.2",
-    "react-hook-form": "^7.15.3",
+    "lru-cache": "^9.1.1",
+    "mongoose": "^7.1.0",
+    "next": "^13.3.1",
+    "react": "^18.2.0",
+    "react-copy-to-clipboard": "^5.1.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.9",
     "react-use-pagination": "^2.0.1",
-    "validator": "^13.6.0",
-    "yup": "^0.32.9"
+    "validator": "^13.9.0",
+    "yup": "^1.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.5",
-    "@types/lru-cache": "^5.1.1",
-    "@types/mongoose": "^5.11.97",
-    "@types/react": "^17.0.21",
-    "@types/react-copy-to-clipboard": "^5.0.1",
-    "@types/validator": "^13.6.3",
-    "eslint": "^7.32.0",
-    "eslint-config-next": "^11.1.2",
-    "typescript": "^4.4.3"
+    "@types/react": "^18.2.0",
+    "@types/react-copy-to-clipboard": "^5.0.4",
+    "@types/validator": "^13.7.15",
+    "typescript": "^5.0.4"
   },
   "license": "MIT"
 }

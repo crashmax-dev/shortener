@@ -10,11 +10,11 @@ const Slug: NextPage = () => {
   )
 }
 
-Slug.getInitialProps = async ({ res, query }) => {
-  const data = await findUrl(query.slug as string)
+Slug.getInitialProps = async (ctx) => {
+  const data = await findUrl(ctx.query.slug as string)
   const location = data ? data.url : '/'
 
-  res.writeHead(301, {
+  ctx.res!.writeHead(301, {
     Location: location
   }).end()
 }

@@ -1,7 +1,7 @@
 import Url, { IUrl } from '~/models/Url'
 import isURL from '~/lib/valid-url'
 import rateLimit from '~/lib/rate-limit'
-import connectToDatabase from '~/lib/mongodb'
+import { connectToDatabase } from '~/lib/mongodb'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 const limiter = rateLimit({
@@ -43,7 +43,7 @@ export default async function shortener(req: NextApiRequest, res: NextApiRespons
     } catch (err) {
       return res.status(400).json({
         ok: false,
-        message: err._message || err.message
+        message: (err as Error).message
       })
     }
   }
