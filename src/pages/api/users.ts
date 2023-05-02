@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 // GET /api/users
 export default async function handle(
   req: NextApiRequest,
-  res: NextApiResponse,
+  res: NextApiResponse
 ) {
   const users = await prisma.user.findMany({
     select: {
