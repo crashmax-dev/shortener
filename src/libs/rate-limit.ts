@@ -6,7 +6,7 @@ type Options = {
   interval?: number
 }
 
-export default function rateLimit(options?: Options) {
+export function rateLimit(options?: Options) {
   const tokenCache = new LRUCache({
     max: options?.uniqueTokenPerInterval || 500,
     ttl: options?.interval || 60000

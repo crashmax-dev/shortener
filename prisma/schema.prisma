@@ -11,7 +11,6 @@ datasource db {
 
 model Account {
   id                       String  @id @default(cuid())
-  userId                   String  @map("user_id")
   type                     String
   provider                 String
   providerAccountId        String  @map("provider_account_id")
@@ -24,7 +23,8 @@ model Account {
   id_token                 String? @db.Text
   session_state            String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
   @@map("accounts")
@@ -33,9 +33,10 @@ model Account {
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique @map("session_token")
-  userId       String   @map("user_id")
   expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("sessions")
 }
@@ -45,10 +46,12 @@ model User {
   name          String?
   email         String?   @unique
   emailVerified DateTime? @map("email_verified")
+  password      String?
   image         String?
-  accounts      Account[]
-  sessions      Session[]
-  links         Link[]
+
+  accounts Account[]
+  sessions Session[]
+  links    Link[]
 
   @@map("users")
 }
@@ -63,7 +66,8 @@ model VerificationToken {
 }
 
 model Link {
-  id     String @id @default(cuid())
+  id String @id @default(cuid())
+
   userId String
   user   User?  @relation(fields: [userId], references: [id], onDelete: Cascade)
 
